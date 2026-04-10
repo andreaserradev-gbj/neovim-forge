@@ -1,0 +1,93 @@
+[
+  {
+    "id": "w2-flash-jump",
+    "week": 2,
+    "day": 14,
+    "title": "Flash Sprint",
+    "type": "speed",
+    "description": "Use flash.nvim to jump to 10 targets as fast as possible",
+    "skills": ["s", "S", "flash-labels"],
+    "startingCode": "import { useState, useEffect } from 'react';\nimport type { Day, Challenge } from '../lib/types';\nimport { formatDate } from '../utils/dates';\nimport { DayNav } from '../components/DayNav';\nimport { Sidebar } from '../components/Sidebar';\nimport { Search } from '../components/Search';\n\nexport function CoursePage({ days }: { days: Day[] }) {\n  const [currentDay, setCurrentDay] = useState(1);\n  const [searchQuery, setSearchQuery] = useState('');\n  const [isLoading, setIsLoading] = useState(true);\n\n  useEffect(() => {\n    const filtered = days.filter(d => d.title.includes(searchQuery));\n    setIsLoading(false);\n  }, [searchQuery]);\n\n  return (\n    <div className=\"flex min-h-screen\">\n      <Sidebar days={days} current={currentDay} />\n      <main className=\"flex-1 p-8\">\n        <Search value={searchQuery} onChange={setSearchQuery} />\n        <DayNav current={currentDay} total={days.length} />\n      </main>\n    </div>\n  );\n}",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "Flash-jump to 'useState' on line 1",
+      "Flash-jump to 'Challenge' on line 2",
+      "Flash-jump to 'Sidebar' import on line 5",
+      "Flash-jump to 'CoursePage' function name",
+      "Flash-jump to 'searchQuery' in the filter callback",
+      "Flash-jump to the closing </div>",
+      "Flash-jump to 'className' attribute",
+      "Flash-jump to 'onChange' prop",
+      "Flash-jump to 'useEffect' call",
+      "Flash-jump back to the import block"
+    ],
+    "hints": ["Press s then type the first 1-2 characters of your target", "Flash shows labels — press the label character to jump instantly", "Each jump should take 3-4 keystrokes maximum"]
+  },
+  {
+    "id": "w2-surround-mastery",
+    "week": 2,
+    "day": 14,
+    "title": "Surround Master",
+    "type": "editing",
+    "description": "Transform text using surround operations",
+    "skills": ["sa", "sd", "sr", "iw", "a\"", "i("],
+    "startingCode": "const title = Hello World;\nconst items = item1, item2, item3;\nconst message = 'old quotes';\nconst wrapper = (unnecessary parens);\nconst html = content here;\nconst fn = value;",
+    "expectedCode": "const title = \"Hello World\";\nconst items = [item1, item2, item3];\nconst message = \"old quotes\";\nconst wrapper = unnecessary parens;\nconst html = <div>content here</div>;\nconst fn = fn(value);",
+    "optimalKeystrokes": 35,
+    "hints": [
+      "Use saiw\" to surround a word with quotes",
+      "Use sr'\" to replace single quotes with double quotes",
+      "Use sd( to delete surrounding parentheses",
+      "Use saiw] to surround with brackets"
+    ]
+  },
+  {
+    "id": "w2-buffer-workflow",
+    "week": 2,
+    "day": 14,
+    "title": "Buffer Juggler",
+    "type": "navigation",
+    "description": "Manage multiple buffers and windows efficiently",
+    "skills": ["<C-hjkl>", "<S-h>", "<S-l>", "<leader>-", "<leader>|", "<leader>bd", "<leader>bb"],
+    "startingCode": "",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "Open index.astro (<leader>ff, type 'index')",
+      "Split vertically (<leader>|)",
+      "Open Base.astro in the new split (<leader>ff)",
+      "Navigate to the left window (<C-h>)",
+      "Split horizontally (<leader>-)",
+      "Open DayNav.astro below",
+      "Switch to the right window (<C-l>)",
+      "Close the current window (<leader>wd)",
+      "Cycle through remaining buffers (<S-l>, <S-h>)",
+      "Delete a buffer (<leader>bd)"
+    ],
+    "hints": ["<C-hjkl> navigates between windows", "<leader>| creates a vertical split, <leader>- creates a horizontal split"]
+  },
+  {
+    "id": "w2-combined-workflow",
+    "week": 2,
+    "day": 14,
+    "title": "The Week 2 Gauntlet",
+    "type": "speed",
+    "description": "Combine leader keys, flash, explorer, surround, and window management in a timed workflow",
+    "skills": ["<leader>e", "s", "<C-hjkl>", "sa", "sd", "<leader>ff", "<leader>/"],
+    "startingCode": "",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "Open the explorer (<leader>e)",
+      "Navigate to app/src/components/",
+      "Open DayNav.astro",
+      "Flash-jump to a prop name (s + chars)",
+      "Surround it with backticks (saiw`)",
+      "Open a split and find Search.astro (<leader>| then <leader>ff)",
+      "Search for 'onChange' across the project (<leader>/)",
+      "Close the split (<leader>wd)"
+    ],
+    "hints": ["This challenge tests your ability to combine Week 2 skills fluidly", "Don't rush — accuracy beats speed at this stage"]
+  }
+]

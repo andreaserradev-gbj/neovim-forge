@@ -1,0 +1,74 @@
+[
+  {
+    "id": "w1-navigation-basics",
+    "week": 1,
+    "day": 7,
+    "title": "Navigate the Gauntlet",
+    "type": "navigation",
+    "description": "Navigate to 5 specific locations in a file using only motions from Week 1",
+    "skills": ["hjkl", "w", "b", "e", "gg", "G", "f", "t", "0", "$", "^"],
+    "startingCode": "const config = {\n  name: \"neovim-forge\",\n  version: \"1.0.0\",\n  description: \"Learn Neovim by building\",\n  author: {\n    name: \"Alex\",\n    email: \"alex@example.com\"\n  },\n  dependencies: {\n    astro: \"^5.0.0\",\n    tailwind: \"^3.4.0\",\n    mdx: \"^4.0.0\"\n  },\n  scripts: {\n    dev: \"astro dev\",\n    build: \"astro build\",\n    preview: \"astro preview\"\n  }\n};",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "Move to line 1, column 1 (gg0)",
+      "Jump to the word 'version' (use /version or 2w)",
+      "Jump to the email value (use /email then f\")",
+      "Jump to the last line (G)",
+      "Jump to the word 'build' in scripts (use ?build)"
+    ],
+    "hints": ["Use gg to go to top, G to go to bottom", "/ searches forward, ? searches backward", "f jumps to a character on the current line"]
+  },
+  {
+    "id": "w1-editing-transform",
+    "week": 1,
+    "day": 7,
+    "title": "The Transformation",
+    "type": "editing",
+    "description": "Transform a JavaScript object into a TypeScript interface using operators and text objects",
+    "skills": ["d", "c", "y", "p", "iw", "i\"", "dd", "cw", ".", "3j"],
+    "startingCode": "const user = {\n  name: \"Alex\",\n  age: 30,\n  email: \"alex@example.com\",\n  isActive: true,\n  role: \"developer\"\n};",
+    "expectedCode": "interface User {\n  name: string;\n  age: number;\n  email: string;\n  isActive: boolean;\n  role: string;\n}",
+    "optimalKeystrokes": 42,
+    "hints": [
+      "Start by changing 'const user =' to 'interface User' using cw",
+      "Use ci\" to change string values to their types",
+      "The dot command (.) repeats your last change"
+    ]
+  },
+  {
+    "id": "w1-visual-column",
+    "week": 1,
+    "day": 7,
+    "title": "Column Commander",
+    "type": "editing",
+    "description": "Use block visual mode to add a prefix to multiple lines",
+    "skills": ["Ctrl-v", "j", "I", "A", "v", "V", "gv"],
+    "startingCode": "name\nemail\nage\nrole\nisActive\ncreatedAt\nupdatedAt",
+    "expectedCode": "user.name\nuser.email\nuser.age\nuser.role\nuser.isActive\nuser.createdAt\nuser.updatedAt",
+    "optimalKeystrokes": 12,
+    "hints": [
+      "Use Ctrl-v to enter block visual mode",
+      "Select all lines with 6j",
+      "Press I to insert at the beginning of each selected line",
+      "Type 'user.' then Escape — it applies to all lines"
+    ]
+  },
+  {
+    "id": "w1-search-replace",
+    "week": 1,
+    "day": 7,
+    "title": "Search and Replace",
+    "type": "editing",
+    "description": "Use substitution commands to refactor variable names",
+    "skills": ["/", "n", "N", "*", ":%s", ":s"],
+    "startingCode": "function getData(url) {\n  const data = fetch(url);\n  const result = data.json();\n  console.log(data);\n  return result;\n}",
+    "expectedCode": "function getData(endpoint) {\n  const response = fetch(endpoint);\n  const result = response.json();\n  console.log(response);\n  return result;\n}",
+    "optimalKeystrokes": 28,
+    "hints": [
+      "Use :%s/url/endpoint/g to rename url to endpoint",
+      "Use :%s/data/response/g to rename data to response",
+      "Be careful: 'data' appears in 'getData' — use word boundaries: :%s/\\<data\\>/response/g"
+    ]
+  }
+]

@@ -1,0 +1,110 @@
+name: Checkpoint Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install app dependencies
+        working-directory: ./app
+        run: npm ci
+
+      - name: Check TypeScript
+        working-directory: ./app
+        run: npx astro check || true
+
+      - name: Build app
+        working-directory: ./app
+        run: npm run build
+
+      - name: Validate checkpoints
+        run: |
+          echo "=== Checkpoint Validation ==="
+
+          # Check which days have been committed by looking at commit messages
+          COMPLETED_DAYS=$(git log --oneline --all | grep -oP 'day-\d+' | sort -u)
+
+          if [ -z "$COMPLETED_DAYS" ]; then
+            echo "No day commits found yet. That is fine — start with Day 1!"
+            exit 0
+          fi
+
+          echo "Completed days found in commit history:"
+          echo "$COMPLETED_DAYS"
+
+          ERRORS=0
+
+          for DAY_DIR in $COMPLETED_DAYS; do
+            DAY_NUM=$(echo "$DAY_DIR" | grep -oP '\d+')
+            echo ""
+            echo "--- Validating $DAY_DIR ---"
+
+            # Check that course content exists for this day
+            if [ ! -f "course/$DAY_DIR/index.md" ]; then
+              echo "WARNING: course/$DAY_DIR/index.md not found"
+            fi
+
+            # Day-specific validations
+            case $DAY_NUM in
+              01)
+                if [ ! -f "app/src/pages/index.astro" ]; then
+                  echo "FAIL: app/src/pages/index.astro missing"
+                  ERRORS=$((ERRORS + 1))
+                fi
+                ;;
+              02)
+                if [ ! -f "app/src/layouts/Base.astro" ]; then
+                  echo "FAIL: app/src/layouts/Base.astro missing"
+                  ERRORS=$((ERRORS + 1))
+                fi
+                ;;
+              03)
+                if [ ! -f "app/src/content/config.ts" ]; then
+                  echo "FAIL: app/src/content/config.ts missing"
+                  ERRORS=$((ERRORS + 1))
+                fi
+                ;;
+              05)
+                if [ ! -f "app/src/styles/global.css" ]; then
+                  echo "FAIL: app/src/styles/global.css missing"
+                  ERRORS=$((ERRORS + 1))
+                fi
+                if [ ! -f "app/tailwind.config.mjs" ]; then
+                  echo "FAIL: app/tailwind.config.mjs missing"
+                  ERRORS=$((ERRORS + 1))
+                fi
+                ;;
+              17)
+                if ! ls app/.prettier* 1>/dev/null 2>&1 && ! grep -q "prettier" app/package.json 2>/dev/null; then
+                  echo "FAIL: No prettier configuration found"
+                  ERRORS=$((ERRORS + 1))
+                fi
+                ;;
+            esac
+
+            echo "  $DAY_DIR: OK"
+          done
+
+          echo ""
+          echo "=== Summary ==="
+          echo "Days validated: $(echo "$COMPLETED_DAYS" | wc -l)"
+
+          if [ $ERRORS -gt 0 ]; then
+            echo "ERRORS: $ERRORS"
+            exit 1
+          fi
+
+          echo "All checkpoints passed."

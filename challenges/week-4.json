@@ -1,0 +1,90 @@
+[
+  {
+    "id": "w4-marks-navigation",
+    "week": 4,
+    "day": 28,
+    "title": "Mark Your Territory",
+    "type": "navigation",
+    "description": "Use marks and the jumplist to navigate a complex codebase",
+    "skills": ["m", "'", "`", "<C-o>", "<C-i>", "g;", "g,"],
+    "startingCode": "",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "Open app/src/pages/index.astro and set mark a (ma)",
+      "Open app/src/layouts/Base.astro and set mark b (mb)",
+      "Open app/src/components/DayNav.astro and set mark c (mc)",
+      "Jump to mark a ('a) — verify you're in index.astro",
+      "Jump to mark b ('b) — verify you're in Base.astro",
+      "Use the jumplist to go back (<C-o> twice)",
+      "Use the jumplist to go forward (<C-i>)",
+      "Jump to your last edit position (g;)"
+    ],
+    "hints": ["Marks persist within a session", "Lowercase marks are per-buffer, uppercase marks are global (cross-file)", "<C-o> and <C-i> traverse the jumplist"]
+  },
+  {
+    "id": "w4-text-object-surgery",
+    "week": 4,
+    "day": 28,
+    "title": "Text Object Surgery",
+    "type": "editing",
+    "description": "Use advanced mini.ai text objects to restructure code",
+    "skills": ["daf", "cic", "yau", "dao", "vif"],
+    "startingCode": "class UserService {\n  private users: User[] = [];\n\n  async getUser(id: string): Promise<User> {\n    const user = this.users.find(u => u.id === id);\n    if (!user) {\n      throw new Error(`User ${id} not found`);\n    }\n    return user;\n  }\n\n  async createUser(data: CreateUserInput): Promise<User> {\n    const user: User = {\n      id: crypto.randomUUID(),\n      ...data,\n      createdAt: new Date(),\n    };\n    this.users.push(user);\n    return user;\n  }\n\n  async deleteUser(id: string): Promise<void> {\n    const index = this.users.findIndex(u => u.id === id);\n    if (index === -1) {\n      throw new Error(`User ${id} not found`);\n    }\n    this.users.splice(index, 1);\n  }\n}",
+    "expectedCode": "class UserService {\n  private users: User[] = [];\n\n  async createUser(data: CreateUserInput): Promise<User> {\n    const user: User = {\n      id: crypto.randomUUID(),\n      ...data,\n      createdAt: new Date(),\n    };\n    this.users.push(user);\n    return user;\n  }\n}",
+    "optimalKeystrokes": 18,
+    "hints": [
+      "Use daf to delete an entire function",
+      "Position cursor inside getUser, then daf deletes the whole function",
+      "Do the same for deleteUser",
+      "mini.ai's 'f' object understands function boundaries"
+    ]
+  },
+  {
+    "id": "w4-grug-far-refactor",
+    "week": 4,
+    "day": 28,
+    "title": "Global Refactor",
+    "type": "refactoring",
+    "description": "Use grug-far to perform a project-wide rename with regex",
+    "skills": ["<leader>sr", "regex", "preview", "apply"],
+    "startingCode": "",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "Open grug-far (<leader>sr)",
+      "Search for 'DayNav' across all .astro and .ts files",
+      "Replace with 'LessonNavigation'",
+      "Preview all changes before applying",
+      "Apply the changes",
+      "Check diagnostics (<leader>xx) to verify nothing broke",
+      "Undo the changes (this was practice)"
+    ],
+    "hints": ["grug-far shows a preview of all changes before applying", "Use file glob filters to limit scope", "After applying, check diagnostics to catch any issues"]
+  },
+  {
+    "id": "w4-graduation-flight",
+    "week": 4,
+    "day": 30,
+    "title": "The Final Flight",
+    "type": "speed",
+    "description": "The ultimate challenge: combine all 30 days of skills in a timed workflow",
+    "skills": ["all"],
+    "startingCode": "",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "STAGE 1 — Navigation (target: 30s): Flash-jump to 3 functions across 2 files, set marks at each, return to start via jumplist",
+      "STAGE 2 — Editing (target: 60s): Transform a data structure using operators, text objects, surround, and macros. Convert 5 raw strings to typed objects.",
+      "STAGE 3 — Refactoring (target: 60s): Rename a component with LSP, fix all diagnostics, format all changed files",
+      "STAGE 4 — Workflow (target: 60s): Stage changes with gitsigns, open lazygit, write commit message, push",
+      "STAGE 5 — Speed (target: 30s): Apply the same surround operation to 10 words using dot command and flash-jump"
+    ],
+    "hints": [
+      "Total par time: 240 seconds (4 minutes)",
+      "Under 180 seconds: Master level",
+      "Under 120 seconds: You can fly",
+      "Focus on smooth transitions between stages — don't rush individual operations"
+    ]
+  }
+]

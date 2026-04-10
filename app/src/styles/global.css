@@ -1,0 +1,4 @@
+/* Built on Day 5: Tailwind base styles + dark mode */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

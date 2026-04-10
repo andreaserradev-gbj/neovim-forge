@@ -1,0 +1,85 @@
+[
+  {
+    "id": "w3-lsp-navigation",
+    "week": 3,
+    "day": 21,
+    "title": "LSP Explorer",
+    "type": "navigation",
+    "description": "Navigate a TypeScript codebase using LSP features",
+    "skills": ["gd", "gr", "gI", "K", "<leader>ca", "<leader>cr"],
+    "startingCode": "",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "Open app/src/lib/types.ts",
+      "Place cursor on the Day interface name",
+      "Find all references (gr) — note how many files use it",
+      "Go to one of the references (Enter on a result)",
+      "Hover the type to see its definition (K)",
+      "Go back to the definition (gd on the type name)",
+      "Rename the interface from Day to CourseDay (<leader>cr)",
+      "Verify all references updated (gr again)",
+      "Undo the rename (u) to keep the original name"
+    ],
+    "hints": ["gd takes you to where something is defined", "gr shows you everywhere it's used", "<leader>cr renames across all files"]
+  },
+  {
+    "id": "w3-register-gymnastics",
+    "week": 3,
+    "day": 21,
+    "title": "Register Gymnastics",
+    "type": "editing",
+    "description": "Use named registers to juggle multiple pieces of text",
+    "skills": ["\"a", "\"b", "\"c", "\"+", "\"_", ":reg"],
+    "startingCode": "// Source values\nconst firstName = \"Alex\";\nconst lastName = \"Smith\";\nconst role = \"Developer\";\n\n// Template — fill in the blanks\nconst greeting = \"Hello, FIRST LAST!\";\nconst signature = \"-- FIRST LAST, ROLE\";\nconst badge = \"[ROLE] FIRST LAST\";",
+    "expectedCode": "// Source values\nconst firstName = \"Alex\";\nconst lastName = \"Smith\";\nconst role = \"Developer\";\n\n// Template — fill in the blanks\nconst greeting = \"Hello, Alex Smith!\";\nconst signature = \"-- Alex Smith, Developer\";\nconst badge = \"[Developer] Alex Smith\";",
+    "optimalKeystrokes": 45,
+    "hints": [
+      "Yank 'Alex' to register a: \"ayi\"",
+      "Yank 'Smith' to register b: \"byi\"",
+      "Yank 'Developer' to register c: \"cyi\"",
+      "Replace each placeholder: ciw then Ctrl-r a (or \"ap after positioning)"
+    ]
+  },
+  {
+    "id": "w3-macro-power",
+    "week": 3,
+    "day": 21,
+    "title": "Macro Machine",
+    "type": "editing",
+    "description": "Record and replay a macro to transform repetitive data",
+    "skills": ["q", "@", "@@", "count+@"],
+    "startingCode": "name,email,role\nAlex,alex@example.com,admin\nMarco,marco@example.com,editor\nLucia,lucia@example.com,viewer\nGiulia,giulia@example.com,admin\nPaolo,paolo@example.com,editor\nSara,sara@example.com,viewer\nLuca,luca@example.com,admin\nElena,elena@example.com,editor",
+    "expectedCode": "name,email,role\n{ name: \"Alex\", email: \"alex@example.com\", role: \"admin\" },\n{ name: \"Marco\", email: \"marco@example.com\", role: \"editor\" },\n{ name: \"Lucia\", email: \"lucia@example.com\", role: \"viewer\" },\n{ name: \"Giulia\", email: \"giulia@example.com\", role: \"admin\" },\n{ name: \"Paolo\", email: \"paolo@example.com\", role: \"editor\" },\n{ name: \"Sara\", email: \"sara@example.com\", role: \"viewer\" },\n{ name: \"Luca\", email: \"luca@example.com\", role: \"admin\" },\n{ name: \"Elena\", email: \"elena@example.com\", role: \"editor\" },",
+    "optimalKeystrokes": 55,
+    "hints": [
+      "Go to line 2, record a macro: qa",
+      "Transform one CSV line to an object literal",
+      "Stop recording: q",
+      "Replay on remaining lines: 7@a"
+    ]
+  },
+  {
+    "id": "w3-refactoring-challenge",
+    "week": 3,
+    "day": 21,
+    "title": "The Refactoring",
+    "type": "refactoring",
+    "description": "Complete a multi-step refactoring using LSP, diagnostics, formatting, and git",
+    "skills": ["<leader>cr", "[d", "]d", "<leader>cf", "<leader>ghs", "<leader>gg"],
+    "startingCode": "",
+    "expectedCode": "",
+    "optimalKeystrokes": 0,
+    "tasks": [
+      "Open app/src/components/DayNav.astro",
+      "Rename a prop using <leader>cr",
+      "Check for diagnostics with <leader>xx",
+      "Navigate to each error with ]d and fix it",
+      "Format the file with <leader>cf",
+      "Preview your changes in gitsigns (<leader>ghp)",
+      "Stage the hunk (<leader>ghs)",
+      "Open lazygit and commit (<leader>gg)"
+    ],
+    "hints": ["This tests the full refactoring workflow", "Use ]d to jump between errors quickly", "Stage individual hunks instead of entire files for clean commits"]
+  }
+]
