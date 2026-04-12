@@ -4,7 +4,7 @@ title: "AI-Assisted Editing"
 phase: 4
 summary: "Integrate GitHub Copilot into your Vim workflow — let AI suggest, you review and refine"
 vim_skills: ["Tab", "Escape", "<C-]>", "copilot-cycle", "copilot-panel"]
-plugin_focus: ["copilot.lua"]
+plugin_focus: "copilot.lua"
 app_milestone: "AI-assisted features page documenting workflow tips"
 estimated_time: "45-60 min"
 prerequisites: ["day-26"]

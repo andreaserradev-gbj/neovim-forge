@@ -191,7 +191,7 @@ Add this code:
 
 ```astro
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 
 const { slug } = Astro.params;
@@ -202,7 +202,7 @@ if (!day) {
   return Astro.redirect("/404");
 }
 
-const { Content } = await day.render();
+const { Content } = await render(day);
 ---
 
 <Base title={day.data.title}>
@@ -255,7 +255,7 @@ Create `src/pages/reference/[slug].astro` for reference content:
 
 ```astro
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 
 const { slug } = Astro.params;
@@ -266,7 +266,7 @@ if (!ref) {
   return Astro.redirect("/404");
 }
 
-const { Content } = await ref.render();
+const { Content } = await render(ref);
 ---
 
 <Base title={ref.data.title}>
@@ -309,9 +309,10 @@ Open `src/content/config.ts` and ensure you have collection definitions:
 
 ```typescript
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const day = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "*/index.md", base: "../course" }),
   schema: z.object({
     day: z.number(),
     title: z.string(),
@@ -326,7 +327,7 @@ const day = defineCollection({
 });
 
 const reference = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "*.md", base: "../reference" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -338,20 +339,21 @@ export const collections = { day, reference };
 
 **Using vim:** Edit the file using `o` for insert lines, `w` to jump between words, `:w` to save.
 
-#### Step 6: Update astro.config.mjs
+#### Step 6: Verify astro.config.mjs
 
-Ensure the config points to the course directory:
+Ensure the config includes both MDX and Tailwind integrations:
 
 ```javascript
 import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-  integrations: [mdx()],
-  // ... other config
+  integrations: [mdx(), tailwind()],
 });
 ```
 
-The content collection needs to know where your content is. This might already be configured, but verify the `astro.config.mjs` has the right setup.
+The content collection paths are defined in `src/content/config.ts` via the `glob` loader, so `astro.config.mjs` doesn't need content-specific configuration.
 
 #### Step 7: Test the Build
 

@@ -393,9 +393,10 @@ nvim app/src/content/config.ts
 
 ```typescript
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const course = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '*/index.md', base: '../course' }),
   schema: z.object({
     day: z.number(),
     title: z.string(),
@@ -414,7 +415,7 @@ export const collections = {
 };
 ```
 
-This tells Astro how to structure course data from MDX files.
+This tells Astro how to structure course data. The `glob` loader pulls content from the `course/` directory at the repository root, loading only the `index.md` files (not exercises or companion files).
 
 #### Step 4: Create the Day Page Template
 
@@ -429,7 +430,7 @@ nvim app/src/pages/day/[slug].astro
 
 ```astro
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
 export async function getStaticPaths() {
@@ -441,7 +442,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Base title={entry.data.title} description={entry.data.summary}>

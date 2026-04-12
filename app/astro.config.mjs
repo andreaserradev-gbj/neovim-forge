@@ -4,8 +4,4 @@ import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
   integrations: [mdx(), tailwind()],
-  content: {
-    // Course content lives outside the app directory
-    sources: ["../course"],
-  },
 });

@@ -4,7 +4,7 @@ title: "Todos & Custom Keys"
 phase: 4
 summary: "Track progress with TODO markers and build your own keyboard shortcuts"
 vim_skills: ["]t", "[t", "<leader>xt", "<leader>xT", "<leader>st", "<leader>sT", "todo-comments", "custom-keymaps"]
-plugin_focus: ["todo-comments.nvim", "which-key.nvim"]
+plugin_focus: "todo-comments.nvim, which-key.nvim"
 app_milestone: "Progress tracking using TODO markers, keyboard shortcut reference page"
 estimated_time: "50-60 min"
 prerequisites: ["day-25"]

@@ -4,7 +4,7 @@ title: "Folds & Terminal"
 phase: 4
 summary: "Hide irrelevant code and work in the terminal without leaving Vim"
 vim_skills: ["za", "zc", "zo", "zR", "zM", "zf{motion}", "zd", "<leader>ft", "<leader>fT", "<C-/>", "terminal-mode"]
-plugin_focus: ["snacks.nvim terminal"]
+plugin_focus: "snacks.nvim terminal"
 app_milestone: "Collapsible sections component, dev workflow documentation page"
 estimated_time: "50-60 min"
 prerequisites: ["day-22"]

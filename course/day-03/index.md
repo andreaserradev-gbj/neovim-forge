@@ -318,9 +318,10 @@ Update the schema:
 
 ```typescript
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const course = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '*/index.md', base: '../course' }),
   schema: z.object({
     day: z.number(),
     title: z.string(),

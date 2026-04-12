@@ -158,7 +158,7 @@ git push
 - Check `astro.config.mjs` to confirm the content collection path
 
 **"Content not rendering on day page"**
-- The dynamic page template needs `const { Content } = await entry.render();`
+- The dynamic page template needs `const { Content } = await render(entry);` (import `render` from `astro:content`)
 - Ensure `<Content />` is in your JSX/Astro template
 - Check that your MDX files are in the `course` collection directory
 

@@ -361,7 +361,7 @@ Update `app/src/pages/day/[slug].astro` to include the breadcrumb:
 
 ```astro
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import FileTree from "../../components/FileTree.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
@@ -374,7 +374,7 @@ if (!day) {
   return Astro.redirect("/404");
 }
 
-const { Content } = await day.render();
+const { Content } = await render(day);
 ---
 
 <Base title={day.data.title}>
@@ -425,7 +425,7 @@ Create `app/src/pages/reference/[slug].astro` with the same structure:
 
 ```astro
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import FileTree from "../../components/FileTree.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
@@ -438,7 +438,7 @@ if (!ref) {
   return Astro.redirect("/404");
 }
 
-const { Content } = await ref.render();
+const { Content } = await render(ref);
 ---
 
 <Base title={ref.data.title}>

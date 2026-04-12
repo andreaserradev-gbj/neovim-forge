@@ -4,7 +4,7 @@ title: "Project-Wide Replace"
 phase: 4
 summary: "Transform your entire codebase with grug-far.nvim — find and replace with precision and preview"
 vim_skills: ["<leader>sr", "grug-far patterns", "grug-far regex", "quickfix-list", ":copen", ":cnext", ":cprev"]
-plugin_focus: ["grug-far.nvim"]
+plugin_focus: "grug-far.nvim"
 app_milestone: "Major refactoring exercise — rename a core component and all references using grug-far"
 estimated_time: "50-60 min"
 prerequisites: ["day-24"]

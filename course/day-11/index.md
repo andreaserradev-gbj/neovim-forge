@@ -279,7 +279,7 @@ Create `app/src/pages/day/[slug]/index.astro` (note: this replaces the single `[
 
 ```astro
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Base from "../../../layouts/Base.astro";
 import FileTree from "../../../components/FileTree.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
@@ -294,8 +294,8 @@ if (!day) return Astro.redirect("/404");
 
 const dayExercises = exercises.find((e) => e.data.day === day.data.day);
 
-const { Content: DayContent } = await day.render();
-const exerciseContent = dayExercises ? (await dayExercises.render()).Content : null;
+const { Content: DayContent } = await render(day);
+const exerciseContent = dayExercises ? (await render(dayExercises)).Content : null;
 ---
 
 <Base title={day.data.title}>
@@ -352,11 +352,12 @@ Update `app/src/content/config.ts` to include exercises:
 
 ```typescript
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 // ... existing collections ...
 
 const exercises = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "*/exercises.md", base: "../course" }),
   schema: z.object({
     day: z.number(),
     title: z.string(),

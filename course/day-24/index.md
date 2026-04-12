@@ -4,7 +4,7 @@ title: "Advanced Text Objects"
 phase: 4
 summary: "Master mini.ai for semantic code editing — extract, refactor, and rename with precision"
 vim_skills: ["io/ao", "if/af", "ic/ac", "iu/au", "id/ad", "ie/ae", "ig/ag", "iq/aQ", "g[", "g]", "daf", "cic", "yau"]
-plugin_focus: ["mini.ai advanced"]
+plugin_focus: "mini.ai advanced"
 app_milestone: "Refactoring exercise: extract components using text object selection"
 estimated_time: "50-60 min"
 prerequisites: ["day-23"]
